@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['cors'])->group(function() {
+    Route::group(['prefix' => 'products'], function() {
+        Route::get('/', 'ProductController@index');
+        Route::get('/{id}', 'ProductController@get');
+        Route::get('/category/{category}', 'ProductController@getByCategory');
+    });
+    Route::get('/shipping/{size}', 'FormsController@getShipping');
+    Route::post('/confirm', 'TransactionController@confirm');
 });

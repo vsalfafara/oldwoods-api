@@ -21,20 +21,20 @@ class Transaction extends Migration
             $table->string('mobile_number');
             $table->string('email');
             $table->string('delivery_address');
-            $table->string('delivery_city');
+            $table->string('delivery_city')->nullable();
             $table->string('delivery_province');
             $table->enum('mode_of_payment', ['Paymongo CC','Paymongo OTC','BDO','BPI']);
-            $table->enum('payment_status', ['Unpaid','Paid']);
-            $table->date('paid_date');
-            $table->string('payment_ref_num', 45);
+            $table->enum('payment_status', ['Unpaid','Paid'])->default('Unpaid');
+            $table->date('paid_date')->nullable();
+            $table->string('payment_ref_num', 45)->nullable();
             $table->integer('total_price');
             $table->integer('shipping_fee');
-            $table->integer('paymongo_fee');
-            $table->integer('net_amount');
-            $table->enum('shipping_method', ['Pickup','Delivery']);
-            $table->date('delivery_date');
-            $table->integer('login_id');
-            $table->string('shipping_id');
+            $table->integer('paymongo_fee')->nullable();
+            $table->integer('net_amount')->nullable();
+            $table->enum('shipping_method', ['Pickup','Delivery'])->default('Delivery');
+            $table->date('delivery_date')->nullable();
+            $table->integer('login_id')->nullable();
+            $table->string('shipping_id')->nullable();
         });
     }
 
